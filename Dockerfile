@@ -15,6 +15,12 @@ COPY jupyter_notebook_config.py /home/jovyan/.jupyter/
 # Crear y establecer los permisos adecuados para el directorio de trabajo
 RUN chmod -R 777 /home/jovyan/work
 
+# Crear un archivo para desactivar el parámetro -Xfrozen_modules
+RUN echo "import sys; sys.setdlopenflags(0x100 | sys.getdlopenflags())" > /etc/pythonstartup.py
+
+# Establecer la variable de entorno PYTHONSTARTUP para que se ejecute el archivo al iniciar Python
+ENV PYTHONSTARTUP="/etc/pythonstartup.py"
+
 # Cambiar al usuario jovyan (usuario por defecto en jupyter/scipy-notebook)
 USER jovyan
 
