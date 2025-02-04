@@ -1,21 +1,22 @@
-# Ejecutar el contenedor
+# Run the container
 run:
 	docker-compose up -d --build
 
-# Detener y eliminar el contenedor y los volúmenes
+# Stop and remove the container and volumes
 stop:
 	docker-compose down --rmi local
 
-# Reconstruir la imagen y reiniciar el contenedor
+# Rebuild the image and restart the container
 rebuild: stop run
 
-# Entrar en el contenedor en modo interactivo
+# Enter the container in interactive mode
 shell:
 	docker-compose exec jupyter /bin/bash
 
-# Ver logs del contenedor
+# View container logs
 logs:
 	docker-compose logs -f
 
+# List all containers
 ps:
 	docker ps -a
